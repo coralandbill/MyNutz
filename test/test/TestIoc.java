@@ -1,7 +1,7 @@
 package test;
 
 import net.xmf.nutz.demo.ioc.Pet;
-import net.xmf.nutz.module.User.UserModule;
+import net.xmf.nutz.module.user.UserModule;
 
 import org.junit.Test;
 import org.nutz.dao.Dao;
