@@ -1,32 +1,30 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 <!--     <link rel="icon" href="../../favicon.ico">
  -->
-    <title>登陆</title>
+    <title>Jumbotron Template for Bootstrap</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="<%=request.getContextPath() %>/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
     <link href="jumbotron.css" rel="stylesheet">
-    <jsp:include page="include/top.jsp"></jsp:include>
- <!--   	<script>
-	   	$(function () {
-	   		$("#loginForm").submit(function () {
-	   			$.ajax({
-	   				url : "${base}/user/login",
-	   				data : $("#loginForm").serialize(),
-	   				success : function (res) {
-	   					alert(res);
-	   					return false;
-	   				},
-	   				fail : function(res) {
-	   					alert("系统错误?!");
-	   				}
-	   			});
-	   			return false;
-	   		});
-	   	});
-   	</script> -->
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="<%=request.getContextPath() %>/assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="http://cdn.bootcss.com/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
   </head>
 
   <body>
@@ -50,7 +48,7 @@
 	            <li class="dropdown">
 	              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
 	              <ul class="dropdown-menu" role="menu">
-	                <li><a href="<%=request.getContextPath() %>/file/uploadFile.jsp">上传文件</a></li>
+	                <li><a href="#">Action</a></li>
 	                <li><a href="#">Another action</a></li>
 	                <li><a href="#">Something else here</a></li>
 	                <li class="divider"></li>
@@ -60,12 +58,12 @@
 	              </ul>
 	            </li>
 	          </ul>
-	          <form class="navbar-form navbar-right" role="form" action="user/login" method="post">
+	          <form class="navbar-form navbar-right" role="form" action="<%=request.getContextPath() %>/user/login">
 	            <div class="form-group">
-	              <input type="text" name="loginName" placeholder="邮箱/手机号" class="form-control">
+	              <input type="text" placeholder="邮箱/手机号" class="form-control">
 	            </div>
 	            <div class="form-group">
-	              <input type="password" name="password" placeholder="密码" class="form-control">
+	              <input type="password" placeholder="密码" class="form-control">
 	            </div>
 	            <button type="submit" class="btn btn-success">登 录</button>
 	          </form>
@@ -110,6 +108,12 @@
     </div> <!-- /container -->
 
 
-    <jsp:include page="include/foot.jsp"></jsp:include>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<%=request.getContextPath() %>/jquery/1.11.1/jquery.min.js"></script>
+    <script src="<%=request.getContextPath() %>/dist/js/bootstrap.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="<%=request.getContextPath() %>/assets/js/ie10-viewport-bug-workaround.js"></script>
   </body>
 </html>
