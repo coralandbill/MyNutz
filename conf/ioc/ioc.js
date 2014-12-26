@@ -1,4 +1,4 @@
-var ioc = {
+/*var ioc = {
     log : {
         type :'org.nutz.aop.interceptor.LoggingMethodInterceptor'
     },
@@ -19,4 +19,4 @@ var ioc = {
             ]
         }
     }
-};
+};*/

@@ -1,4 +1,4 @@
-var ioc = {
+/*var ioc = {
 	dataSource : {
 		type : "com.alibaba.druid.pool.DruidDataSource",
 		events : {
@@ -15,4 +15,4 @@ var ioc = {
 		type : "org.nutz.dao.impl.NutDao",
 		args : [{refer:'dataSource'}]
 	}
-};
+};*/
