@@ -1,10 +1,10 @@
-package net.xmf.nutz.module.User;
+package net.xmf.nutz.module.user;
 
 import java.util.Date;
 
 import javax.servlet.http.HttpSession;
 
-import net.xmf.nutz.bean.User;
+import net.xmf.nutz.bean.HyUser;
 
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
@@ -15,6 +15,8 @@ import org.nutz.log.Log;
 import org.nutz.log.Logs;
 import org.nutz.mvc.annotation.At;
 import org.nutz.mvc.annotation.Attr;
+import org.nutz.mvc.annotation.Encoding;
+import org.nutz.mvc.annotation.Fail;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
@@ -27,22 +29,25 @@ public class UserModule {
 	@Inject
 	private Dao dao;
 	
-	@At
-	public boolean login(@Param("name")String name,@Param("passwd")String passwd,
+	@At("/login")
+	@Ok("jsp:jsp.success")
+	@Fail("jsp:jsp.index")
+	@Encoding(input="UTF-8",output="UTF-8")
+	public String login(@Param("loginName")String loginName,@Param("password")String password,
 			HttpSession session){
-		if(Strings.isBlank(name)|| Strings.isBlank(passwd)){
-			return false;
+		if(Strings.isBlank(loginName)|| Strings.isBlank(password)){
+			return "登录失败，用户名或密码不能为空!";
 		}else{
-			name = name.trim().intern();
-			passwd = passwd.trim().intern();
+			loginName = loginName.trim().intern();
+			password = password.trim().intern();
 		}
 		
-		User user = dao.fetch(User.class,Cnd.where("name","=",name).and("passwd","=",passwd));
-		if(user == null){
-			return false;
+		HyUser hyUser = dao.fetch(HyUser.class,Cnd.where("loginName","=",loginName).and("password","=",password));
+		if(hyUser == null){
+			return "登录失败，用户名或密码错误!";
 		}else{
-			session.setAttribute("me", user);
-			return true;
+			session.setAttribute("user", hyUser);
+			return "登录成功！";
 		}
 		
 	}
@@ -54,8 +59,8 @@ public class UserModule {
 	}
 	
 	@At
-	public User me(@Attr("me")User user){
-		return user;
+	public HyUser me(@Attr("me")HyUser hyUser){
+		return hyUser;
 	}
 	
 	@At("/ping")

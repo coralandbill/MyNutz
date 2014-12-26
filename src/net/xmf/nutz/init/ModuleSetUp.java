@@ -1,6 +1,5 @@
 package net.xmf.nutz.init;
 
-import net.xmf.nutz.bean.User;
 
 import org.nutz.dao.Dao;
 import org.nutz.dao.entity.annotation.Table;
@@ -20,7 +19,7 @@ public class ModuleSetUp implements Setup{
 		log.debug("config ioc = "+config.getIoc());
 		log.debug("config urlmapping = "+config.getAtMap());
 		
-		Dao dao = config.getIoc().get(Dao.class);
+		/*Dao dao = config.getIoc().get(Dao.class);
 		for (Class<?> clazz : Scans.me().scanPackage("net.xmf.nutz.bean")) {
 			if(clazz.getAnnotation(Table.class) !=null){
 				dao.create(clazz, false);
@@ -32,7 +31,7 @@ public class ModuleSetUp implements Setup{
 			users.setName("admin");
 			users.setPasswd("123456");
 			dao.insert(users);
-		}
+		}*/
 	}
 
 	@Override
