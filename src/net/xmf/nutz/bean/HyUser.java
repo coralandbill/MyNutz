@@ -1,11 +1,16 @@
 package net.xmf.nutz.bean;
 
 
+import java.util.List;
+
 import org.nutz.dao.entity.annotation.Id;
+import org.nutz.dao.entity.annotation.Many;
 import org.nutz.dao.entity.annotation.Table;
 
 @Table("hy_user")
 public class HyUser {
+	
+	public static final String SESSION_NAME = "user";
 
 	@Id
 	private long id;
@@ -17,6 +22,9 @@ public class HyUser {
 	private String password;
 	
 	private String birtyday;
+	
+	@Many(target=UploadImage.class,field="userId")
+	private List<UploadImage> uploadImage;
 
 	public long getId() {
 		return id;
@@ -56,6 +64,14 @@ public class HyUser {
 
 	public void setBirtyday(String birtyday) {
 		this.birtyday = birtyday;
+	}
+
+	public List<UploadImage> getUploadImage() {
+		return uploadImage;
+	}
+
+	public void setUploadImage(List<UploadImage> uploadImage) {
+		this.uploadImage = uploadImage;
 	}
 
 	

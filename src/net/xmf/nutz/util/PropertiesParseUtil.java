@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +50,7 @@ public class PropertiesParseUtil {
 	 * 获取配置的上传图片路径(请求专用)
 	 * @return
 	 */
-	public static String getImagePath(HttpServletRequest request){
+	public static Map<String,Object> getImagePath(HttpServletRequest request){
 		InputStream inputStream = null;
 		String spath = "";
 		try {
@@ -61,7 +62,10 @@ public class PropertiesParseUtil {
 				if("*".equals(spath)){
 					spath = request.getSession().getServletContext().getRealPath("/");
 					if(spath.indexOf("classes")>0){
-						spath = spath.substring(0, spath.length()-8)+"WEB-INF\tmp";
+						/*spath = spath.substring(0, spath.length()-8)+"WEB-INF\tmp";*/
+						spath = spath.substring(0, spath.length()-8)+"tmp";
+					}else{
+						spath = spath+"tmp";
 					}
 				}
 			} catch (IOException e) {
@@ -71,6 +75,7 @@ public class PropertiesParseUtil {
 			log.error("解析common.properties异常,文件不存在或者配置错误,请检查!");
 			e.printStackTrace();
 		}
+		log.debug("上传图片路径为:"+spath);
 		return spath;
 	}
 	

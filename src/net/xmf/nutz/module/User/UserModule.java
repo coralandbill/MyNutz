@@ -46,7 +46,7 @@ public class UserModule {
 		if(hyUser == null){
 			return "登录失败，用户名或密码错误!";
 		}else{
-			session.setAttribute("user", hyUser);
+			session.setAttribute(HyUser.SESSION_NAME, hyUser);
 			return "登录成功！";
 		}
 		

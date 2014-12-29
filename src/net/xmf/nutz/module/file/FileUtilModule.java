@@ -10,11 +10,14 @@ import java.nio.channels.FileChannel;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 
+import net.xmf.nutz.filter.UserLoginFilter;
 import net.xmf.nutz.util.PropertiesParseUtil;
 import net.xmf.nutz.util.UploadFileUtil;
 
 import org.nutz.mvc.annotation.AdaptBy;
 import org.nutz.mvc.annotation.At;
+import org.nutz.mvc.annotation.By;
+import org.nutz.mvc.annotation.Filters;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 import org.nutz.mvc.upload.FieldMeta;
@@ -22,7 +25,8 @@ import org.nutz.mvc.upload.TempFile;
 import org.nutz.mvc.upload.UploadAdaptor;
 
 @At("/file")
-public class FileUtilModule {
+@Filters({@By(type=UserLoginFilter.class)})
+public class FileUtilModule{
 	
 	@At("/uploadFile")
 	@Ok("jsp:file.uploadFile")
@@ -39,8 +43,7 @@ public class FileUtilModule {
 		File f = file.getFile();                       // 这个是保存的临时文件
 	    FieldMeta meta = file.getMeta();               // 这个原本的文件信息
 	    String oldName = meta.getFileLocalName();    // 这个时原本的文件名称
-	    System.out.println("=======PropertiesParseUtil:"+PropertiesParseUtil.getImagePath(request));
-	    /*UploadFileUtil.CopyFileByFile(f, path);*/
+	    UploadFileUtil.CopyFileByFile(f, PropertiesParseUtil.getImagePath(request)+"/"+oldName);
 	    
 	}
 	
