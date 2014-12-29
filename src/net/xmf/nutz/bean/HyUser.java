@@ -23,7 +23,7 @@ public class HyUser {
 	
 	private String birtyday;
 	
-	@Many(target=UploadImage.class,field="userId")
+	@Many(target=UploadImage.class, field = "userId")
 	private List<UploadImage> uploadImage;
 
 	public long getId() {

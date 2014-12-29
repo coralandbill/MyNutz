@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -53,6 +54,7 @@ public class PropertiesParseUtil {
 	public static Map<String,Object> getImagePath(HttpServletRequest request){
 		InputStream inputStream = null;
 		String spath = "";
+		Map<String,Object> map = new HashMap<String, Object>();
 		try {
 			 inputStream = new BufferedInputStream(new FileInputStream(request.getSession().getServletContext().getRealPath("/")+"WEB-INF/classes/common.properties"));
 			 Properties properties = new Properties();
@@ -68,6 +70,7 @@ public class PropertiesParseUtil {
 						spath = spath+"tmp";
 					}
 				}
+				map.put("path", spath);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -76,7 +79,7 @@ public class PropertiesParseUtil {
 			e.printStackTrace();
 		}
 		log.debug("上传图片路径为:"+spath);
-		return spath;
+		return map;
 	}
 	
 	public static void main(String[] args) {

@@ -6,6 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
+import java.util.Map;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -43,7 +44,9 @@ public class FileUtilModule{
 		File f = file.getFile();                       // 这个是保存的临时文件
 	    FieldMeta meta = file.getMeta();               // 这个原本的文件信息
 	    String oldName = meta.getFileLocalName();    // 这个时原本的文件名称
-	    UploadFileUtil.CopyFileByFile(f, PropertiesParseUtil.getImagePath(request)+"/"+oldName);
+	    Map map = PropertiesParseUtil.getImagePath(request);
+	    UploadFileUtil.CopyFileByFile(f, map.get("path").toString()+"/"+oldName);
+	    
 	    
 	}
 	
