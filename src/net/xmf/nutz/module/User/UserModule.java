@@ -5,7 +5,9 @@ import java.util.Date;
 import javax.servlet.http.HttpSession;
 
 import net.xmf.nutz.bean.HyUser;
+import net.xmf.nutz.module.CommonModule;
 
+import org.h2.command.Command;
 import org.nutz.dao.Cnd;
 import org.nutz.dao.Dao;
 import org.nutz.ioc.loader.annotation.Inject;
@@ -20,21 +22,22 @@ import org.nutz.mvc.annotation.Fail;
 import org.nutz.mvc.annotation.Ok;
 import org.nutz.mvc.annotation.Param;
 
-@IocBean
+//@IocBean
 @At("/user")
-public class UserModule {
+public class UserModule extends CommonModule{
 	
 	private static final Log log = Logs.get();
 	
-	@Inject
+	/*@Inject
 	private Dao dao;
-	
+	*/
 	@At("/login")
 	@Ok("jsp:jsp.success")
 	@Fail("jsp:jsp.index")
 	@Encoding(input="UTF-8",output="UTF-8")
 	public String login(@Param("loginName")String loginName,@Param("password")String password,
 			HttpSession session){
+		System.out.println("============1111111111111111===========dao:"+dao);
 		if(Strings.isBlank(loginName)|| Strings.isBlank(password)){
 			return "登录失败，用户名或密码不能为空!";
 		}else{

@@ -3,7 +3,9 @@ package net.xmf.nutz.bean;
 import java.util.Date;
 
 import org.nutz.dao.entity.annotation.Id;
+import org.nutz.dao.entity.annotation.Table;
 
+@Table("up_loadImage")
 public class UploadImage {
 	
 	@Id
@@ -18,6 +20,8 @@ public class UploadImage {
 	private Long userId;
 	
 	private Date uploadDate;
+	
+	private String imageTitle;
 
 	public Long getId() {
 		return id;
@@ -65,6 +69,14 @@ public class UploadImage {
 
 	public void setUploadDate(Date uploadDate) {
 		this.uploadDate = uploadDate;
+	}
+
+	public String getImageTitle() {
+		return imageTitle;
+	}
+
+	public void setImageTitle(String imageTitle) {
+		this.imageTitle = imageTitle;
 	}
 	
 	
