@@ -35,7 +35,7 @@ public class TestIoc {
 		NutIoc ioc = new NutIoc(loader);
 		
 		Dao dao = ioc.get(Dao.class);
-		System.out.println("==11==dao:"+dao);
+		System.out.println("==1111==dao:"+dao);
 	}
 	
 	@Test 
