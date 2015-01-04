@@ -32,42 +32,56 @@ public class FileUtilModule extends CommonModule{
 	
 	@At("/uploadFile")
 	@Ok("jsp:file.uploadFile")
-	public void toUploadFile(@Param("map") Map<String, Object> map,HttpServletRequest request){
+	public Map<String,Object> toUploadFile(HttpServletRequest request){
+		Map<String,Object> map = new HashMap<String,Object>();
 		List <UploadImage> upList = dao.query(UploadImage.class, null);
-		if(map!=null){
-			System.out.println("========map:"+map.get("msg").toString());
-		}
 		if(upList!=null){
-			request.setAttribute("upList", upList);
+			//request.setAttribute("upList", upList);
+			map.put("upList", upList);
+		}else{
+			map.put("upList", "");
 		}
+		return map;
 	}
 	
 	@At("/doUpload")
-	//@Ok("jsp:file.uploadFile")
-	@Ok("redirect:/file/uploadFile?map=${obj}")
+	@Ok("jsp:file.uploadFile")
+	//@Ok("redirect:/file/uploadFile?map=${obj}")
 	//缓存位置,文件上限大小,编码,最大文件个数 直接标注稍后使用json解析properties配置
 	@AdaptBy(type=UploadAdaptor.class,args={"${app.root}/WEB-INF/tmp","8192", "UTF-8", "10" })
 	public Map<String,Object> doUploadFile(@Param("file") TempFile file, HttpServletRequest request,
 			ServletContext context) {
-		Map<String,Object> map = new HashMap<String,Object>();
-		/*File f = file.getFile();                       // 这个是保存的临时文件
+		Map<String,Object> _map = new HashMap<String,Object>();
+		File f = file.getFile();                       // 这个是保存的临时文件
 	    FieldMeta meta = file.getMeta();               // 这个原本的文件信息
 	    String oldName = meta.getFileLocalName();    // 这个时原本的文件名称
-	    Map map = PropertiesParseUtil.getImagePath(request);
-	    UploadFileUtil.CopyFileByFile(f, map.get("path").toString()+"/"+oldName);
+	    Map<String,Object> map = PropertiesParseUtil.getImagePath(request);
+	    if((Boolean) map.get("success")){
+	    	UploadFileUtil.CopyFileByFile(f, map.get("path").toString()+"/"+oldName);
+		    
+		    HyUser hyUser = (HyUser)request.getSession().getAttribute(HyUser.SESSION_NAME);
+		    
+		    UploadImage uploadImage = new UploadImage();
+		    uploadImage.setImageDescri("图片说明");
+		    uploadImage.setImageName(oldName);
+		    uploadImage.setImageTitle(oldName);
+		    uploadImage.setImagePath(map.get("path").toString()+"/"+oldName);
+		    uploadImage.setUploadDate(new Date());
+		    uploadImage.setUserId(hyUser.getId());
+		    dao.insert(uploadImage);
+		    _map.put("msg", "上传成功!");
+	    }else{
+	    	_map.put("msg", "上传失败!");
+	    }
 	    
-	    HyUser hyUser = (HyUser)request.getSession().getAttribute(HyUser.SESSION_NAME);
-	    
-	    UploadImage uploadImage = new UploadImage();
-	    uploadImage.setImageDescri("图片说明");
-	    uploadImage.setImageName(oldName);
-	    uploadImage.setImageTitle(oldName);
-	    uploadImage.setImagePath(map.get("path").toString()+"/"+oldName);
-	    uploadImage.setUploadDate(new Date());
-	    uploadImage.setUserId(hyUser.getId());
-	    dao.insert(uploadImage);*/
-	    map.put("msg", "上传成功!");
-		return map;
+	    List <UploadImage> upList = dao.query(UploadImage.class, null);
+		if(upList!=null){
+			//request.setAttribute("upList", upList);
+			_map.put("upList", upList);
+		}else{
+			_map.put("upList", "");
+		}
+		return _map;
 	}
 	
 }

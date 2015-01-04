@@ -71,12 +71,14 @@ public class PropertiesParseUtil {
 					}
 				}
 				map.put("path", spath);
+				map.put("success", true);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
 		} catch (FileNotFoundException e) {
 			log.error("解析common.properties异常,文件不存在或者配置错误,请检查!");
 			e.printStackTrace();
+			map.put("success", false);
 		}
 		log.debug("上传图片路径为:"+spath);
 		return map;

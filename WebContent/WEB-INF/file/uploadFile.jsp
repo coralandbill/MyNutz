@@ -20,7 +20,7 @@
 
     <div class="container" style="margin-top: 60px;">
       <!-- Example row of columns -->
-      <c:forEach items="${upList }" varStatus="ind" var="upImage">
+      <c:forEach items="${obj.upList }" varStatus="ind" var="upImage">
       	<c:if test="${(ind.index+1)%3==1 }">
       		<div class="row">
       	</c:if>
@@ -67,7 +67,7 @@
       </footer>
     </div> <!-- /container -->
     <script type="text/javascript">
-    	var msg = "${msg}";
+    	var msg = "${obj.msg}";
     	alert(msg);
     </script>
 	<jsp:include page="/include/foot.jsp"></jsp:include>
