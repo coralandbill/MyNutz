@@ -47,7 +47,7 @@ public class TestIoc {
 		dataSource.setPassword("123456");
 		
 		NutDao dao = new NutDao(dataSource);
-		System.out.println("====22===dao:"+dao);
+		System.out.println("====222===dao:"+dao);
 	}
 	
 	@Test 
